@@ -7,10 +7,9 @@ services:
     container_name: earth-sensors-website
     restart: unless-stopped
     read_only: true
+    # The unprivileged image keeps every writable path under /tmp.
     tmpfs:
       - /tmp
-      - /var/cache/nginx
-      - /var/run
     cap_drop:
       - ALL
     security_opt:
