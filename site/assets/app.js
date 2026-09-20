@@ -144,9 +144,7 @@
       note.hidden = true;
       note.appendChild(document.createTextNode(item.note || ""));
       if (item.derived) {
-        const d = el("div", "mono", "derived: " + item.derived);
-        d.style.marginTop = ".5rem";
-        d.style.color = "var(--ink-3)";
+        const d = el("div", "mono u-derived", "derived: " + item.derived);
         note.appendChild(d);
       }
 
@@ -167,13 +165,8 @@
     };
 
     SUPPLY.forEach((s) => mkRow(s, "supply"));
-    const sep = el("div", "ladder__row");
-    sep.style.cursor = "default";
-    sep.style.background = "var(--paper-3)";
-    sep.style.borderBottom = "1px solid var(--rule)";
-    const sepLabel = el("div", "eyebrow", "what a node needs ↓");
-    sepLabel.style.gridColumn = "1 / -1";
-    sepLabel.style.padding = ".3rem 0";
+    const sep = el("div", "ladder__row u-sep");
+    const sepLabel = el("div", "eyebrow u-sep-label", "what a node needs ↓");
     sep.appendChild(sepLabel);
     host.appendChild(sep);
     DEMAND.forEach((d) => mkRow(d, "demand"));
@@ -414,9 +407,9 @@
           el("p", null, nb.band.use),
           el("div", "mono", "Canada: " + nb.band.ca),
         );
-        card.style.display = "";
+        card.classList.remove("u-hidden");
       } else {
-        card.style.display = "none";
+        card.classList.add("u-hidden");
       }
     }
 
@@ -467,10 +460,9 @@
       );
       panel.appendChild(stack);
 
-      const measure = el("p", null, "");
+      const measure = el("p", "u-measure", "");
       measure.appendChild(el("span", "eyebrow", "what is measured  "));
       measure.appendChild(document.createTextNode(s.measure));
-      measure.style.marginBottom = "1.2rem";
       panel.appendChild(measure);
 
       const nums = el("div", "scn__nums");
@@ -544,10 +536,7 @@
         : t.status.includes("deployed") ? "deployed"
         : t.status.includes("contested") ? "contested" : "refuted";
       c.appendChild((() => {
-        const s = el("span", "chip chip--" + chipCls, t.status);
-        s.style.marginBottom = ".7rem";
-        s.style.display = "inline-block";
-        return s;
+        return el("span", "chip chip--" + chipCls + " u-chip-block", t.status);
       })());
       c.appendChild(el("h3", null, t.claim));
       const p = el("p", null, t.body);
@@ -565,10 +554,7 @@
       c.appendChild(el("span", "eyebrow", "Layer " + l.n + " · " + l.cls));
       c.appendChild(el("h3", null, l.name));
       c.appendChild(el("p", null, l.body));
-      const cons = el("p", null, l.consequence);
-      cons.style.borderLeft = "2px solid var(--copper)";
-      cons.style.paddingLeft = ".8rem";
-      cons.style.marginTop = "1rem";
+      const cons = el("p", "u-consequence", l.consequence);
       c.appendChild(cons);
       host.appendChild(c);
     });
