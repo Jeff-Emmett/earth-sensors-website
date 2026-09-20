@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Earth Sensors — a field guide to batteryless sensing</title>
+<meta name="description" content="The ground cannot power your sensors. It can host them. A sourced field guide to passive resonant sensing, natural energy harvesting and earth-coupled links — for community infrastructure that has to outlive its batteries.">
+<meta property="og:title" content="Earth Sensors — a field guide to batteryless sensing">
+<meta property="og:description" content="Atmospheric electricity pays 0.6 nW per square metre. Soil bacteria pay 3 mW. Sunlight pays watts. Here is what that means for sensing a landscape without batteries.">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23EDE5D4'/%3E%3Cpath d='M4 20h24M4 24h24M4 28h24' stroke='%23A8482A' stroke-width='1.5'/%3E%3Ccircle cx='16' cy='11' r='5' fill='none' stroke='%232C6B63' stroke-width='1.5'/%3E%3Cpath d='M16 16v6' stroke='%23A8482A' stroke-width='1.5'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..600&family=Martian+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <span class="topbar__brand">Earth Sensors</span>
+  <nav>
+    <a href="#ladder-plate">I · Ladder</a>
+    <a href="#traverse-plate">II · Traverse</a>
+    <a href="#evidence-plate">III · Evidence</a>
+    <a href="#tesla-plate">IV · Tesla</a>
+    <a href="#scenario-plate">V · Ground</a>
+    <a href="#arch-plate">VI · Architecture</a>
+    <a href="#bench-plate">VII · Bench</a>
+  </nav>
+  <button class="topbar__toggle" id="theme" type="button">night</button>
+</div>
+
+<!-- ================= MASTHEAD ================= -->
+<header class="mast wrap">
+  <div class="mast__kicker rise d1">
+    <span>Field guide</span><span>·</span>
+    <span>Passive sensing</span><span>·</span>
+    <span>Natural harvesting</span><span>·</span>
+    <span>Earth-coupled links</span><span>·</span>
+    <b>every number sourced</b>
+  </div>
+
+  <h1 class="rise d2">The ground cannot power your sensors.<em>It can host them.</em></h1>
+
+  <p class="mast__sub rise d3">
+    There is a persistent hope that the Earth is quietly offering free electricity — that a copper rod,
+    an antenna coil, a resonance in the sky might run a landscape full of instruments with no batteries
+    to change. <strong>The hope is off by three to nine orders of magnitude</strong>, and the measurements
+    that kill it are the same ones that show what actually works.
+  </p>
+
+  <div class="thesis rise d4">
+    <p>
+      <strong>Atmospheric electricity pays about 0.6 nanowatts per square metre. Soil bacteria pay three
+      milliwatts. Sunlight pays twenty watts.</strong>
+    </p>
+    <p>
+      But a sensor that needs no power at all changes the question. A resonator has no key, no state and
+      no compute — it answers an interrogation and costs nothing to keep alive for thirty years. Put the
+      energy in one node that moves, and the landscape fills with instruments that cannot go flat.
+    </p>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= PLATE I — LADDER ================= -->
+<section class="plate wrap" id="ladder-plate">
+  <div class="plate__rail"><span class="plate__no">Plate I</span><span>Supply &amp; demand</span><span>log scale</span></div>
+
+  <h2>Eighteen decades of power, on <em>one axis</em></h2>
+
+  <div class="plate__intro">
+    <p class="lede">
+      Every argument about batteryless sensing is really an argument about this chart. Above the rule,
+      what a place can give a node. Below it, what a node needs. The gap decides the architecture,
+      and no protocol closes it.
+    </p>
+    <p>
+      Drag the footprint. Area-scaled sources grow with it; a thermoelectric module, a tree tap and an
+      electrode span do not. Click any row for the measurement behind it.
+    </p>
+  </div>
+
+  <div class="fig">
+    <div class="fig__head"><b>Figure 1</b><span>Harvestable power against node demand</span><span>logarithmic, 10⁻¹⁶ – 10² W</span></div>
+    <div class="fig__body">
+
+      <div class="ctrls">
+        <div class="ctrl">
+          <label for="lad-area">Collector footprint <output id="lad-area-out">1 m²</output></label>
+          <input type="range" id="lad-area" min="-2" max="1" step="0.02" value="0">
+        </div>
+      </div>
+
+      <div class="ladder" id="ladder"></div>
+
+      <dl class="readout" id="lad-readout"></dl>
+    </div>
+    <div class="fig__foot">
+      One report — wake, read a sensor, send ~50 bytes, hold a short receive window — costs about
+      <strong>0.1 J</strong>. Cadence figures divide the harvest by that. SF12 in a hard RF environment
+      can cost five times more.
+    </div>
+  </div>
+
+  <div class="epi">
+    <h3>The comparison that matters</h3>
+    <p style="font-size:.95rem;color:var(--ink-2)">
+      A square metre of collector at three metres, in perfect fair weather, with a perfect electrometer
+      and no leakage, gathers about half a nanowatt. A square metre of soil under it, colonised by the
+      bacteria that were already there, gives roughly half a million times more — and keeps giving at
+      night, under canopy, and through snow, which is exactly when photovoltaics stop.
+    </p>
+  </div>
+</section>
+
+<!-- ================= PLATE II — TRAVERSE ================= -->
+<section class="plate wrap" id="traverse-plate">
+  <div class="plate__rail"><span class="plate__no">Plate II</span><span>Frequency</span><span>computed live</span></div>
+
+  <h2>How deep you can see, against <em>how much you can say</em></h2>
+
+  <div class="plate__intro">
+    <p class="lede">
+      Choosing a band is choosing a depth. Penetration falls about six orders of magnitude from ELF to
+      UHF while channel capacity rises about nine. There is no band that is good at both, and pretending
+      otherwise is how buried sensor networks fail.
+    </p>
+    <p>
+      Attenuation below is computed from Maxwell's equations for a general lossy medium — no
+      good-conductor shortcut — so it stays honest across the whole sweep:
+      <span class="mono">α = ω √( µε/2 · ( √(1 + (σ/ωε)²) − 1 ) )</span>. Move the moisture slider and
+      watch UHF die.
+    </p>
+  </div>
+
+  <div class="fig">
+    <div class="fig__head"><b>Figure 2</b><span>Spectrum traverse, 3 Hz – 6 GHz</span><span>soil as a lossy dielectric</span></div>
+    <div class="fig__body traverse">
+
+      <svg id="traverse-axis" class="traverse__axis" role="img" aria-label="Frequency axis from 3 Hz to 6 GHz with band markers"></svg>
+
+      <div class="ctrls ctrls--2">
+        <div class="ctrl">
+          <label for="tr-freq">Carrier frequency <output id="tr-freq-out">915 MHz</output></label>
+          <input type="range" id="tr-freq" min="0.477" max="9.778" step="0.01" value="8.961">
+        </div>
+        <div class="ctrl">
+          <label for="tr-sigma">Soil conductivity <output id="tr-sigma-out">0.100 S/m</output></label>
+          <input type="range" id="tr-sigma" min="-3" max="0" step="0.01" value="-1">
+        </div>
+      </div>
+
+      <dl class="traverse__grid" id="traverse-grid"></dl>
+      <div class="bandcard" id="traverse-band"></div>
+    </div>
+    <div class="fig__foot">
+      Relative permittivity is tied to conductivity in the model, because in soil the same thing raises
+      both: water. Dry sand sits near ε<sub>r</sub> 3, saturated loam near 60.
+      <strong>The design move that follows:</strong> bury the probe, keep the antenna above ground.
+    </div>
+  </div>
+
+  <div class="fig">
+    <div class="fig__head"><b>Table 1</b><span>Passive interrogation families</span><span>what answers, and from how far</span></div>
+    <div class="fig__body tbl-scroll">
+      <table>
+        <caption>None of these carries a battery. Read range is free-space to the interrogator.</caption>
+        <thead>
+          <tr><th>Family</th><th>Read range</th><th>Usable depth</th><th>Unit cost</th><th>Why it works</th></tr>
+        </thead>
+        <tbody id="fam-body"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PLATE III — EVIDENCE ================= -->
+<section class="plate wrap" id="evidence-plate">
+  <div class="plate__rail"><span class="plate__no">Plate III</span><span>Electroculture</span><span>the evidence splits</span></div>
+
+  <h2>The copper coil, and <em>the forty kilovolts</em></h2>
+
+  <div class="plate__intro">
+    <p class="lede">
+      Electroculture is two different claims wearing one name. One has been tested properly and does not
+      survive. The other is real, has a living research descendant, and runs on a power supply.
+    </p>
+    <p>
+      The gap between them is about ten thousand. A hobbyist copper-coil antenna is a 1924 Imperial
+      College apparatus with the high-voltage supply removed, sold on the premise that the atmosphere
+      replaces it. The atmosphere offers a four-volt ceiling and delivers two millivolts.
+    </p>
+  </div>
+
+  <div class="fig">
+    <div class="fig__head"><b>Table 2</b><span>Claim by claim</span><span>with the numbers that decide it</span></div>
+    <div class="fig__body tbl-scroll">
+      <table>
+        <caption>The controlled experiment that settles the passive case also produces the voltage figure that governs every power question on this page.</caption>
+        <thead><tr><th style="width:6rem">Verdict</th><th style="width:16rem">Claim</th><th>Evidence</th></tr></thead>
+        <tbody id="ec-body"></tbody>
+      </table>
+    </div>
+    <div class="fig__foot">
+      The 2025 design is worth noticing: three arms, with one copper rod <em>buried</em> so that copper
+      chemistry is separated from copper electricity. The buried arm produced the effect and the exposed
+      arm — the actual electroculture configuration — did not, which inverts the proposed mechanism
+      rather than merely failing to find it.
+    </div>
+  </div>
+</section>
+
+<!-- ================= PLATE IV — TESLA ================= -->
+<section class="plate wrap" id="tesla-plate">
+  <div class="plate__rail"><span class="plate__no">Plate IV</span><span>Tesla</span><span>five claims, five verdicts</span></div>
+
+  <h2>Right about the circuit, wrong about <em>the source</em></h2>
+
+  <div class="plate__intro">
+    <p class="lede">
+      Tesla's 1901 radiant-energy patent describes harvest, accumulate, threshold-dump — precisely the
+      topology every microwatt sensor node uses today. He got the power management right a century early
+      and attached it to a source that pays nanowatts.
+    </p>
+    <p>
+      The claims have to be separated, because they have different truth values and the strong ones keep
+      getting used to prop up the weak ones.
+    </p>
+  </div>
+
+  <div class="cards cards--2" id="tesla"></div>
+
+  <div class="epi" style="margin-top:2rem">
+    <h3>The near-miss that keeps doing damage</h3>
+    <p style="font-size:.95rem;color:var(--ink-2)">
+      Tesla estimated an Earth fundamental near 6 Hz from lightning-return patterns. Schumann computed
+      7.83 Hz in 1952. The numbers are close because both scale off the Earth's circumference — but
+      Tesla's mechanism was a longitudinal wave reflecting at the antipode, and Schumann's is a
+      transverse mode of the Earth–ionosphere cavity. Different cavity, different physics, different
+      wave. A coincidence in the first significant figure is not a confirmation, and treating it as one
+      is the single most common error in this entire literature.
+    </p>
+  </div>
+</section>
+
+<!-- ================= PLATE V — SCENARIOS ================= -->
+<section class="plate wrap" id="scenario-plate">
+  <div class="plate__rail"><span class="plate__no">Plate V</span><span>Ground truth</span><span>six deployments</span></div>
+
+  <h2>Instruments that outlive <em>the plan that funded them</em></h2>
+
+  <div class="plate__intro">
+    <p class="lede">
+      Climate adaptation fails at maintenance. A monitoring network installed with a grant dies in year
+      three when the batteries go and nobody is paid to walk the line. Passive elements do not have that
+      failure mode: the failure mode of a resonator is that it is still a resonator.
+    </p>
+    <p>
+      Six deployments, each with the layer stack that makes it work and the numbers that make it real.
+      Costs are hardware only, at the quantities a single community would buy.
+    </p>
+  </div>
+
+  <div class="scn">
+    <div class="scn__tabs" id="scn-tabs" role="tablist"></div>
+    <div class="scn__panel" id="scn-panel" role="tabpanel"></div>
+  </div>
+</section>
+
+<!-- ================= PLATE VI — ARCHITECTURE ================= -->
+<section class="plate wrap" id="arch-plate">
+  <div class="plate__rail"><span class="plate__no">Plate VI</span><span>Architecture</span><span>four layers</span></div>
+
+  <h2>Concentrate the energy, <em>distribute the silence</em></h2>
+
+  <div class="plate__intro">
+    <p class="lede">
+      The architecture that survives every budget on this page has one powered thing and many silent
+      ones. It removes the battery from every point that is hard to reach by accepting one battery
+      somewhere that is not.
+    </p>
+  </div>
+
+  <div class="cards cards--4" id="layers"></div>
+
+  <div class="epi" style="margin-top:2rem">
+    <h3>Soil attenuation is a security feature</h3>
+    <p style="font-size:.95rem;color:var(--ink-2)">
+      A passive resonator cannot authenticate. Any element cut to the same frequency answers the same
+      interrogation identically, so authenticity has to come from controlling the volume you interrogate
+      rather than from cryptography. Underground, that control is nearly free: thirty centimetres of
+      read range in wet soil is a far stronger physical bound on who could be answering than anything
+      free space gives you. The property that makes buried radio hard is the same property that makes
+      buried radio trustworthy.
+    </p>
+  </div>
+</section>
+
+<!-- ================= PLATE VII — BENCH ================= -->
+<section class="plate wrap" id="bench-plate">
+  <div class="plate__rail"><span class="plate__no">Plate VII</span><span>Bench</span><span>four falsifiable tests</span></div>
+
+  <h2>Four experiments, each with <em>a number stated first</em></h2>
+
+  <div class="plate__intro">
+    <p class="lede">
+      Nothing on this page needs to be taken on trust. Each experiment below costs less than a hundred
+      dollars, and each has a prediction registered before the build — including what result would
+      prove the argument wrong.
+    </p>
+  </div>
+
+  <div class="bench" id="bench"></div>
+
+  <div class="epi" style="margin-top:2rem">
+    <h3>What is not verified here</h3>
+    <ul>
+      <li>
+        <strong>Sources are read, not replicated.</strong> Everything below is cited from published work;
+        only the electroculture trial was read in full. Treat the numbers as <em>supported</em>, not
+        <em>verified</em> — the distinction is the whole point of Plate VII.
+      </li>
+      <li>
+        <strong>Two circulating claims are deliberately absent.</strong> A "University of Copenhagen
+        tomato trial, 2018–2020" and a "2022 citizen-science trial of 47 gardeners, +1.8 % ± 14.3 %"
+        appear in search summaries sourced to content farms. No primary source exists for either. They
+        are probably fabricated and should not be propagated.
+      </li>
+      <li>
+        <strong>Commonly repeated, unconfirmed:</strong> that the UK Electro-Culture Committee
+        (1918–c.1936) wound up after failing to replicate. Widely cited, not verified here.
+      </li>
+      <li>
+        <strong>Original and untested:</strong> the suggestion that lightning sferics or 1 MW VLF
+        transmitters could serve as free illuminators for passive resonators. Sferic impulses are
+        roughly ten thousand times stronger than the Schumann continuum and are impulses, which is what
+        rings a high-Q element — but the return path obeys the same link budget, which probably kills
+        it. Cheap to falsify; experiment D is the nearest relative.
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= REFERENCES ================= -->
+<section class="plate wrap" id="refs-plate">
+  <div class="plate__rail"><span class="plate__no">Sources</span><span>every number</span></div>
+  <h2>References</h2>
+  <div class="plate__intro">
+    <p>
+      Superscripts throughout link here. Where a figure is derived rather than cited, the derivation is
+      shown in the row itself.
+    </p>
+  </div>
+  <ul class="refs" id="refs"></ul>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <p style="margin-bottom:.4rem">
+        <strong style="color:var(--ink)">Earth Sensors</strong> — a field guide to batteryless sensing.
+      </p>
+      <p style="margin:0">
+        Companion to the <span class="mono">edge-freq-surfer</span> and
+        <span class="mono">rmesh-antenna</span> work on holonic RF gateways and passive resonant sensing.
+        Text and figures CC BY-SA. <span id="year"></span>
+      </p>
+    </div>
+    <div class="mono" style="color:var(--ink-3)">earth-sensors.jeffemmett.com</div>
+  </div>
+</footer>
+
+<script src="assets/data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
